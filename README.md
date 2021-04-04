@@ -1,7 +1,7 @@
 start json-server
 
 write "npx json-server src/db.json" on command line, 
-	if host != 'http://localhost:3000/reminders', 
+	if host != 'http://localhost:3000/users', 
 		change this.urldb on app.js
 		
 start project: npm start
