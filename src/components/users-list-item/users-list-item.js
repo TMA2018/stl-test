@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 //import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 //import UserPageChange from '../user-page-change/user-page-change';
-
+import {withRouter} from 'react-router-dom';
 import './users-list-item.css';
 
-export default class UserListItem extends Component {
+class UserListItem extends Component {
 
     render() {
-        const {name, phone, email, country, age, onDelete, onToggleImportant, important, onChangeUser} = this.props;
+        const {name, phone, email, country, age, onDelete, onToggleImportant, important, onChangeUser, userId} = this.props;
         let classNames = 'app-list-item d-flex justify-content-between';     
             
         if (important) {
@@ -27,7 +27,13 @@ export default class UserListItem extends Component {
                         <button 
                             type='button' 
                             className='btn-sm btn-pencil-o'
-                            onClick={onChangeUser}
+                            //onClick={onChangeUser}
+                            onClick={
+                                () => {
+                                    console.log(userId); 
+                                    this.props.history.push(`/${userId}`)
+                                }
+                            }
                         >
                             <i className='fa fa-pencil'></i>
                          </button>
@@ -55,3 +61,5 @@ export default class UserListItem extends Component {
         )
     }
 }
+
+export default withRouter(UserListItem);

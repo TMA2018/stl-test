@@ -161,7 +161,19 @@ export default class App extends Component {
 
         return (
             <Router>
-                <div className='app'>
+                
+                <Route path='/:id' exact render={
+                        ({match}) => {
+                            const {id} = match.params;
+                            console.log(visibleUsers[id-1]);
+                            return <UserPageChange userId={id} user={data[id-1]}/>
+
+                            //return ( <h1> userId={id} user={data[id]}</h1>)
+                        }
+                    } />
+
+                <Route path='/' exact render={() => {return (
+                    <div className='app'>
                     <AppHeader
                         allUsers={allUsers}
                         important={important}
@@ -185,8 +197,10 @@ export default class App extends Component {
                     <UserAddForm
                         onAdd={this.addUser}
                     />
-                    <Route path='/users/:id' component={UserPageChange} />
-                </div>
+                </div>)}}
+                />
+
+                
             </Router>
         )
     }

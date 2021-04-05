@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import Service from '../service/service';
+import {Link} from 'react-router-dom';
 import './user-page-change.css';
 
 export default class UserPageChange  extends Component {
-    service = new Service();
+    //service = new Service();
+/*
     state = {
         name: '',
         phone: '', 
@@ -57,53 +59,64 @@ export default class UserPageChange  extends Component {
             age: ''
         })
     }
-
+*/
     render () {
-        return (
+        const {userId, user} = this.props;
+        return (      
+          <>
+            <Link to='/'>Back to users list</Link>
             <form 
-                className='bottom-panel d-flex'
+                className='userChangeForm'
                 onSubmit={this.onSubmit}>
-                <input
+                <label>Name</label>
+                <input className='changeInput'
                     type='text'
-                    placeholder='write name'
-                    className='form-control new-reminder-label'
+                    label='name'
                     onChange={this.onNameChange}
-                    value={this.state.name}
+                    value={user.name}
                 />
-                <input
+                <label>Phone</label>
+                <input className='changeInput'
                     type='text'
-                    placeholder='write phone'
-                    className='form-control new-reminder-label'
+                    label='phone'
                     onChange={this.onPhoneChange}
-                    value={this.state.phone}
+                    value={user.phone}
                 />
-                <input
+                <label>email
+                    <input className='changeInput'
                     type='text'
-                    placeholder='write mail'
-                    className='form-control new-reminder-label'
+                    label='email'
                     onChange={this.onMailChange}
-                    value={this.state.email}
-                />
-                <input
-                    type='text'
-                    placeholder='write country'
-                    className='form-control new-reminder-label'
+                    value={user.email}
+                /></label>
+                <label>Country</label>
+                <select
                     onChange={this.onCountryChange}
-                    value={this.state.country}
-                />
-                <input
-                    type='text'
-                    placeholder='write age'
-                    className='form-control new-reminder-label'
+                    //value={this.state.country}
+                >
+                    <option value='Australia'>Australia</option>
+                    <option selected value='USA'>USA</option>
+                    <option value='USSR'>USSR</option>
+                </select>
+                <label>age
+                <input className='changeInput'
+                    type='number'
                     onChange={this.onAgeChange}
-                    value={this.state.age}
-                />
+                    value={user.age}
+                /></label>
                 <button
                     type='submit'
                     className='btn btn-online-secondary'
                     //onClick={() => onAdd('Hello')}
-                >add user</button>
+                >save change</button>
             </form>
+          </>
         )
     }
+    
+    /*render () {
+        const {userId, user} = this.props; //{userId} {user}
+        const {name, phone, email, country, age} = user; //{name}, {phone}, {email}, {country}, {age}
+        return ( <h1> mr {userId} {name}, {phone}, {email}, {country}, {age}</h1>)
+    }*/
 }

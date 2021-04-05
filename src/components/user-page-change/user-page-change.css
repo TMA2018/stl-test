@@ -1,0 +1,22 @@
+.userChangeForm {
+    /*display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;*/
+    border: 2px solid gray;
+
+    padding: 10px;
+}
+
+.changeInput {
+    margin: 0 auto;
+    padding: 14px 12px;
+    font-size: 14px;
+    width: 250px;
+}
+.bottom-panel .btn {
+    border: 1px solid gray;
+    width: 200px;
+    margin: 0 auto;
+    padding: 2px 12px;
+  }

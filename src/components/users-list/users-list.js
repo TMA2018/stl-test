@@ -23,6 +23,7 @@ export default class UsersList extends Component {
                         onDelete={() => onDelete(id)}
                         onToggleImportant={() => onToggleImportant(id)}
                         onChangeUser={() => onChangeUser(id)}
+                        userId={id}
                     />
                 </li>
             )

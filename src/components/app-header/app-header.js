@@ -1,6 +1,7 @@
 import React from 'react';
 import './app-header.css';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 const Header = styled.div`
     display: flex;
     align-items: flex-end;
@@ -22,7 +23,7 @@ const Header = styled.div`
 const AppHeader = ({allUsers, important}) =>{
     return (
         <Header colored>
-            <h1>Tala Mikhail</h1>
+            <h1><Link to='/'>Tala Mikhail user list</Link></h1>
             <h2>Your list have {allUsers} users, important {important}</h2>
         </Header> 
     )
