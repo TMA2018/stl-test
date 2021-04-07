@@ -23,7 +23,7 @@ const Header = styled.div`
 const AppHeader = ({allUsers, important}) =>{
     return (
         <Header colored>
-            <h1><Link to='/'>Tala Mikhail user list</Link></h1>
+            <h1><Link to='/'>Mikhail users list</Link></h1>
             <h2>Your list have {allUsers} users, important {important}</h2>
         </Header> 
     )

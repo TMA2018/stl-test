@@ -4,7 +4,7 @@
       "name": "Mikel",
       "phone": "898987",
       "email": "miafa@mail.ru",
-      "country": "Ussr",
+      "country": "USSR",
       "age": 18,
       "id": "1"
     },
@@ -20,7 +20,7 @@
       "name": "User1",
       "phone": "898987",
       "email": "miafa@mail.ru",
-      "country": "Ussr",
+      "country": "USSR",
       "age": 18,
       "id": "3"
     },
@@ -28,7 +28,7 @@
       "name": "Admin",
       "phone": "898987",
       "email": "miafa@mail.ru",
-      "country": "Ussr",
+      "country": "USA",
       "age": 18,
       "id": "4"
     },

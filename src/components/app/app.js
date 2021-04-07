@@ -17,11 +17,11 @@ export default class App extends Component {
         this.urldb = "http://localhost:3000/users";
     }
 
-    makeUser2 = (name, phone, email, country, age, important, id) => {
+    makeUser2 = (name, phone, email, country, age, important=false, id) => {
         return {
             name: name,
             phone: phone,
-            important: Boolean(important),
+            important: important,
             id: id,
             email: email,
             country: country,
@@ -76,7 +76,31 @@ export default class App extends Component {
             }
         });
     }
-
+    onChangeUser = (name, phone, email, country, age, important, id) => {
+        const newUser = this.makeUser2(name, phone, email, country, age, important, id);
+        //this.deleteUser(id);
+        console.log(id);
+        console.log(newUser);
+        this.setState(({data}) => {
+            //const newData = [...data, newUser];
+            const index = data.findIndex((elem) => elem.id === id);
+            console.log(data);
+            console.log(index);
+            const before = data.slice(0, index);
+            console.log(before);
+            const after = data.slice(index + 1);
+            console.log(after);
+            const newData = [...before,newUser, ...after];
+            console.log(newData);
+            /*this.service.setUser(this.urldb, newUser)
+                .then(console.log('posting successful'))
+                .catch(console.log(`posting to ${this.urldb} failure`));*/
+            return {
+                data: newData
+            }
+        });
+        //this.initialState();
+    }
     addUser = (name, phone, email, country, age, important) => {
         const newUser = this.makeUser2(name, phone, email, country, age, important, this.maxId++);
         this.service.setUser(this.urldb, newUser)
@@ -137,7 +161,7 @@ export default class App extends Component {
         this.setState({filter});
     }
 
-    onChangeUser = (id) => {
+    /*onChangeUser = (id) => {
         this.setState(({data}) => {
             const index = data.findIndex((elem) => elem.id === id);
             const old = data[index];
@@ -151,7 +175,7 @@ export default class App extends Component {
                 data: newData
             }
         })
-    }
+    }*/
 
     render() {
         const {data, term, filter, loading} = this.state;
@@ -166,7 +190,11 @@ export default class App extends Component {
                         ({match}) => {
                             const {id} = match.params;
                             console.log(visibleUsers[id-1]);
-                            return <UserPageChange userId={id} user={data[id-1]}/>
+                            return <UserPageChange 
+                                userId={id} 
+                                user={data[id-1]}
+                                onChangeUser={this.onChangeUser}
+                                />
 
                             //return ( <h1> userId={id} user={data[id]}</h1>)
                         }
@@ -192,7 +220,7 @@ export default class App extends Component {
                         loading = {loading}
                         onDelete = {this.deleteUser}
                         onToggleImportant = {this.onToggleImportant}
-                        onChangeUser = {this.onChangeUser}
+                        //onChangeUser = {this.onChangeUser}
                     />
                     <UserAddForm
                         onAdd={this.addUser}

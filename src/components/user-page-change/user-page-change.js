@@ -1,19 +1,27 @@
 import React, {Component} from 'react';
 import Service from '../service/service';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import './user-page-change.css';
 
-export default class UserPageChange  extends Component {
-    //service = new Service();
-/*
-    state = {
-        name: '',
-        phone: '', 
-        email: '', 
-        country: '', 
-        age: ''
-    }
+class UserPageChange  extends Component {
+    service = new Service();
 
+    /*state = {
+        name: this.user.name,
+        phone: this.user.phone, 
+        email: this.user.email, 
+        country: this.user.country, 
+        age: this.user.age
+    }*/
+    state = {
+        name: this.props.user.name,
+        phone: this.props.user.phone, 
+        email: this.props.user.email, 
+        important: this.props.user.important,
+        country: this.props.user.country, 
+        age: this.props.user.age,
+        id: this.props.userId
+    }
     onNameChange = (evt) => {
         this.setState( {
             name: evt.target.value
@@ -40,6 +48,7 @@ export default class UserPageChange  extends Component {
         });
     }
     onSubmit = (evt) => {
+        //console.log(this.state.name);
         evt.preventDefault();
         let r = this.state.name.length;
         let d = this.state.email.length;
@@ -48,67 +57,82 @@ export default class UserPageChange  extends Component {
         if ( r === 0 || d === 0 || t === 0 ) {
             alert('write correct data');
         } else {
-            this.props.onAdd(this.state.name, this.state.phone, this.state.email,this.state.country, this.state.age);
+            console.log(this.state.id);
+            this.props.onChangeUser(this.state.name, this.state.phone, this.state.email, this.state.country, this.state.age,this.state.important, this.state.id);
         }
-        //this.props.onAdd();
-        this.setState({
+        this.props.history.push('/');
+        //this.props.onAdd();name, phone, email, country, age, important=false, id
+        /*this.setState({
             name: '',
             phone: '', 
             email: '', 
             country: '', 
             age: ''
-        })
+        })*/
     }
-*/
+
     render () {
-        const {userId, user} = this.props;
+        //const {user} = this.props;
+        const {user, userId, onChangeUser} = this.props;
+        /*this.setState( {      
+            name: user.name,
+            phone: user.phone, 
+            email: user.email, 
+            country: user.country, 
+            age: user.age
+        });*/
+        let {name, phone, email,country, age} = user;
+        //this.props.userId
         return (      
           <>
             <Link to='/'>Back to users list</Link>
             <form 
                 className='userChangeForm'
-                onSubmit={this.onSubmit}>
+                onSubmit={this.onSubmit}
+            >
                 <label>Name</label>
                 <input className='changeInput'
                     type='text'
                     label='name'
                     onChange={this.onNameChange}
-                    value={user.name}
+                    value={name}
                 />
                 <label>Phone</label>
                 <input className='changeInput'
                     type='text'
                     label='phone'
                     onChange={this.onPhoneChange}
-                    value={user.phone}
+                    value={phone}
                 />
                 <label>email
                     <input className='changeInput'
                     type='text'
                     label='email'
                     onChange={this.onMailChange}
-                    value={user.email}
+                    value={email}
                 /></label>
                 <label>Country</label>
                 <select
+                    value={country}
                     onChange={this.onCountryChange}
                     //value={this.state.country}
                 >
                     <option value='Australia'>Australia</option>
-                    <option selected value='USA'>USA</option>
+                    <option value='USA'>USA</option>
                     <option value='USSR'>USSR</option>
                 </select>
                 <label>age
                 <input className='changeInput'
                     type='number'
                     onChange={this.onAgeChange}
-                    value={user.age}
+                    value={age}
                 /></label>
                 <button
                     type='submit'
                     className='btn btn-online-secondary'
-                    //onClick={() => onAdd('Hello')}
+                    //onClick={() => this.props.history.push('/')}
                 >save change</button>
+                
             </form>
           </>
         )
@@ -120,3 +144,4 @@ export default class UserPageChange  extends Component {
         return ( <h1> mr {userId} {name}, {phone}, {email}, {country}, {age}</h1>)
     }*/
 }
+export default withRouter(UserPageChange);
