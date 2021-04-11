@@ -7,7 +7,7 @@ import './users-list-item.css';
 class UserListItem extends Component {
 
     render() {
-        const {name, phone, email, country, age, onDelete, onToggleImportant, important, onChangeUser, userId} = this.props;
+        const {name, phone, email, country, age, onDelete, onToggleImportant, important, userId} = this.props;
         let classNames = 'app-list-item d-flex justify-content-between';     
             
         if (important) {
@@ -30,7 +30,7 @@ class UserListItem extends Component {
                             //onClick={onChangeUser}
                             onClick={
                                 () => {
-                                    console.log(userId); 
+                                    //console.log(userId); 
                                     this.props.history.push(`/${userId}`)
                                 }
                             }

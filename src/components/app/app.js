@@ -54,7 +54,8 @@ export default class App extends Component {
                         }
                     });
                 }
-            ).catch(console.log(`Failed to get resource`));
+            )
+            //.catch(console.log(`Failed to get resource`));
     }
     componentDidMount() {
         this.initialState();
@@ -79,19 +80,14 @@ export default class App extends Component {
     onChangeUser = (name, phone, email, country, age, important, id) => {
         const newUser = this.makeUser2(name, phone, email, country, age, important, id);
         //this.deleteUser(id);
-        console.log(id);
-        console.log(newUser);
+        
         this.setState(({data}) => {
             //const newData = [...data, newUser];
             const index = data.findIndex((elem) => elem.id === id);
-            console.log(data);
-            console.log(index);
             const before = data.slice(0, index);
-            console.log(before);
             const after = data.slice(index + 1);
-            console.log(after);
+            //console.log(after);
             const newData = [...before,newUser, ...after];
-            console.log(newData);
             /*this.service.setUser(this.urldb, newUser)
                 .then(console.log('posting successful'))
                 .catch(console.log(`posting to ${this.urldb} failure`));*/
@@ -161,22 +157,6 @@ export default class App extends Component {
         this.setState({filter});
     }
 
-    /*onChangeUser = (id) => {
-        this.setState(({data}) => {
-            const index = data.findIndex((elem) => elem.id === id);
-            const old = data[index];
-            let newData = [];
-            
-            let newName = prompt('change name', old.name) || old.name;
-            const newItem = {...old, name: newName}
-            newData= [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-         
-            return {
-                data: newData
-            }
-        })
-    }*/
-
     render() {
         const {data, term, filter, loading} = this.state;
         const important = data.filter(item => item.important).length;
@@ -189,14 +169,12 @@ export default class App extends Component {
                 <Route path='/:id' exact render={
                         ({match}) => {
                             const {id} = match.params;
-                            console.log(visibleUsers[id-1]);
+                            //console.log(visibleUsers[id-1]);
                             return <UserPageChange 
                                 userId={id} 
                                 user={data[id-1]}
                                 onChangeUser={this.onChangeUser}
                                 />
-
-                            //return ( <h1> userId={id} user={data[id]}</h1>)
                         }
                     } />
 
@@ -227,8 +205,6 @@ export default class App extends Component {
                     />
                 </div>)}}
                 />
-
-                
             </Router>
         )
     }

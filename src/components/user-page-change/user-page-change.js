@@ -6,14 +6,16 @@ import './user-page-change.css';
 class UserPageChange  extends Component {
     service = new Service();
 
-    /*state = {
-        name: this.user.name,
-        phone: this.user.phone, 
-        email: this.user.email, 
-        country: this.user.country, 
-        age: this.user.age
-    }*/
     state = {
+        name: '',
+        phone: '',
+        email: '', 
+        country: '', 
+        age: '',
+        important: '',
+        id: ''
+    }
+    /*state = {
         name: this.props.user.name,
         phone: this.props.user.phone, 
         email: this.props.user.email, 
@@ -21,7 +23,7 @@ class UserPageChange  extends Component {
         country: this.props.user.country, 
         age: this.props.user.age,
         id: this.props.userId
-    }
+    }*/
     onNameChange = (evt) => {
         this.setState( {
             name: evt.target.value
@@ -50,15 +52,16 @@ class UserPageChange  extends Component {
     onSubmit = (evt) => {
         //console.log(this.state.name);
         evt.preventDefault();
-        let r = this.state.name.length;
-        let d = this.state.email.length;
-        let t = this.state.phone.length;
+        const {name, phone, email,country, age, important, id} = this.state;
+        let r = name.length;
+        let d = email.length;
+        let t = phone.length;
 
         if ( r === 0 || d === 0 || t === 0 ) {
             alert('write correct data');
         } else {
-            console.log(this.state.id);
-            this.props.onChangeUser(this.state.name, this.state.phone, this.state.email, this.state.country, this.state.age,this.state.important, this.state.id);
+            //console.log(this.state.id);
+            this.props.onChangeUser(name, phone, email, country, age,important, id);
         }
         this.props.history.push('/');
         //this.props.onAdd();name, phone, email, country, age, important=false, id
@@ -70,19 +73,28 @@ class UserPageChange  extends Component {
             age: ''
         })*/
     }
+    initialState = () => {
+        const {user} = this.props;
+        //const {user} = this.state;
+        let {name, phone, email,country, age, important, id} = user; 
 
+        this.setState( {     
+            name: name,
+            phone: phone, 
+            email: email, 
+            country: country, 
+            age: age,
+            important: important,
+            id: id
+        })
+    };
+    componentDidMount() {
+        this.initialState()
+    }
     render () {
-        //const {user} = this.props;
-        const {user, userId, onChangeUser} = this.props;
-        /*this.setState( {      
-            name: user.name,
-            phone: user.phone, 
-            email: user.email, 
-            country: user.country, 
-            age: user.age
-        });*/
-        let {name, phone, email,country, age} = user;
+        
         //this.props.userId
+        let {name, phone, email,country, age} = this.state;
         return (      
           <>
             <Link to='/'>Back to users list</Link>
